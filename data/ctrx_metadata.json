@@ -1,0 +1,30 @@
+{
+  "processing/trnIds/dstStan" : {
+    "dataType" : "INT",
+    "dbTable" : "ORACLE / MARIADB",
+    "length" : "11",
+    "description" : "Linked to column [dst_stan] via DBeaver schema definitions.",
+    "exampleValue" : "80560"
+  },
+  "strid" : {
+    "dataType" : "BIGINT",
+    "dbTable" : "trx",
+    "length" : "20",
+    "description" : "Snowflake ID",
+    "exampleValue" : "8552542928355672322"
+  },
+  "specialProcessing/digitalWallet/par" : {
+    "dataType" : "String",
+    "dbTable" : "trx_proc_result",
+    "length" : "64",
+    "description" : "Primary Account Reference number",
+    "exampleValue" : "par_ETYdNMwNMV"
+  },
+  "trid" : {
+    "dataType" : "INT",
+    "dbTable" : "",
+    "length" : "",
+    "description" : "Core Transaction ID",
+    "exampleValue" : "57612"
+  }
+}

@@ -1,0 +1,26 @@
+[ {
+  "fieldName" : "f4_amount",
+  "ctrxPath" : "amounts/primary/value",
+  "channelDialect" : "GENERIC",
+  "isAuto" : null
+}, {
+  "fieldName" : "f49_currency",
+  "ctrxPath" : "amounts/primary/currency",
+  "channelDialect" : "GENERIC",
+  "isAuto" : null
+}, {
+  "fieldName" : "f22_posEntryMode",
+  "ctrxPath" : "posInfo/posEntryMode/panEntryMode",
+  "channelDialect" : "GENERIC",
+  "isAuto" : null
+}, {
+  "fieldName" : "f22_posEntryMode",
+  "ctrxPath" : "posInfo/posEntryMode/pinEntryMode",
+  "channelDialect" : "GENERIC",
+  "isAuto" : null
+}, {
+  "fieldName" : "f38_approvalCode",
+  "ctrxPath" : "procResult/approvalCode",
+  "channelDialect" : "GENERIC",
+  "isAuto" : null
+} ]

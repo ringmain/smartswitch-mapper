@@ -1,0 +1,712 @@
+{
+  "trid": "57612",
+  "strid": 8552542928355672322,
+  "processing": {
+    "transactionProcessingType": "PURCHASE_ONLINE",
+    "resend": {
+      "type": "AUTO",
+      "sendCounter": 3,
+      "firstSend": "20260216134255",
+      "lastSend": "20260216134325",
+      "nextSend": "20260216134425",
+      "lastSendResult": "FAIL_TEMPORARY",
+      "lastSendErrorMessage": "260216-134255"
+    },
+    "trnIds": {
+      "dstStan": 80560,
+      "acqTrxId": "7189",
+      "rrn": "rrn_stTnqHCJzb",
+      "inChanRrn": "91635",
+      "vs": "vs_QYkVUAgzXv",
+      "receipt": "receipt_FLJKpPidyv",
+      "rid": "",
+      "refundId": 27813,
+      "vs2": "",
+      "inReconciliationId": "",
+      "outReconciliationId": "[short_anobAgoMxE",
+      "cardholderStatementDescriptor": {
+
+      },
+      "requestIdMZ": "static_UnYzDhxilx]"
+    },
+    "processingIds": {
+      "processorName": "processorName_mBLneyAHIp",
+      "processorGroup": "processorGroup_WVbsnqAuNH",
+      "sourceChannelName": "sourceChannel_LvROgyvxOq",
+      "nodeName": "nodeName_OgYRePwElQ",
+      "connName": "connName_udzGVivuHi",
+      "srcProtoFamily": "SPDH",
+      "cardOnFileCode": "cardOnFileCode_PBAgJWpRBR",
+      "coreVersion": "codeVersion_dTsIruyHWD",
+      "offlineAuthentication": "offlineAuthentication_lOizOyNqyv"
+    },
+    "indicators": {
+      "draftCaptureFlag": "1",
+      "partialAuthIndicator": "F",
+      "subSeqRouteIndicator": "",
+      "processingMethodIndicator": "DEF",
+      "manualConfirmationVoice": false,
+      "processorTokenRequest": false,
+      "cardOnFile": "UNKNOWN",
+      "kafkaModeFlag": "STANDARD"
+    },
+    "emvSmartCardScheme": "02",
+    "accountType": {
+      "primary": "Default",
+      "secondary": "Default"
+    },
+    "batchInfo": {
+      "batchId": "",
+      "idInBatch": "",
+      "cutoverCode": ""
+    },
+    "settlementCtrx": {
+      "idx1": "",
+      "idx2": "",
+      "idx3": "",
+      "addToSettlement": true,
+      "singleMessage": false
+    },
+    "tags": [
+
+    ],
+    "preAuth": {
+      "preAuthUuid": "PreAuthUuid_gwoZyGYGut",
+      "amountHold": 110,
+      "amountCompleted": 111,
+      "currency": "EUR",
+      "issuerTrxId": "issuerTrxId_RMoLvVZtIp",
+      "cardPresent": true,
+      "holdTime": 4811,
+      "holdInterval": " "
+    },
+    "fromDisk": true,
+    "deliveryStatus": "UNDELIVERED"
+  },
+  "cad": {
+    "idCad": "id_iJbYVgTaVa",
+    "orgUnitCode": "orgUnitCode_yKRoeYXifW",
+    "merchantCode": "merchantCode_KyigytGuxy",
+    "networkCode": "CSOB",
+    "cadProcData": {
+      "termName": "termName_lrklSQGlhU",
+      "street": "Hollého 14",
+      "city": "Rajec",
+      "postalCode": "01501",
+      "region": "ZA",
+      "country": "Slovensko",
+      "mcc": "mcc_aHMLcARShm",
+      "issuerTerminalId": "issuerTerminalId_PECsaTSkmU",
+      "issuerMerchantId": "issuerMerchantId_zpGHMdeDua",
+      "alternativeIssuerTerminalId": "alternativeIssuerMerchantId_otxyuaWUSR",
+      "alternativeIssuerMerchantId": "alternativeIssuerTerminalId_JevFGxSCSm",
+      "motherCad": "motherCard_oLMkZezSYQ",
+      "terminalSecret": "terminalSecret_GpBQfzWIdg",
+      "mcoi": "mcol_awiaQYEHZE",
+      "binProfileBitMapHex": "binProfileBitMapHex_QwoZJCMJWc"
+    },
+    "termCapability": {
+      "cardDataInputCapability": "5",
+      "cardCaptureCapability": "1",
+      "terminalOperatingEnviroment": "1",
+      "termDataOuputCapability": "0",
+      "pinCaptureCapability": "C",
+      "cardHolderAuthCapability": "5"
+    }
+  },
+  "acquirer": {
+    "networkCode": "CSOB",
+    "panProtectKey": "panProtectKey_gzAiNwGbKZ",
+    "acquirerId": "91635",
+    "forwarderId": "forwarderId_udjeCxcjqW",
+    "cryptoMechanism": "cryptoMechanism_UsqEIjFGxa",
+    "taskPipeline": "taskPipeline_XcamqBBKkI",
+    "boundedRefundConfig": "NONE",
+    "binForbidenProfileCode": "binForbidenProfileCode_PFLTZkTIPE",
+    "supportingRefundId": false,
+    "oldRoutingEnabled": false,
+    "terminalAggregationType": "NONE",
+    "fraudEngineUpdateEnabled": false
+  },
+  "cardholder": {
+    "pan": "568619**640",
+    "track2": "*****************",
+    "cardTypeCode": "cardTypeCode_FkbCOlFSIE"
+  },
+  "posInfo": {
+    "posEntryMode": {
+      "panEntryMode": "00",
+      "pinEntryMode": "0"
+    },
+    "posConditionCode": "",
+    "cardHolderPresentIndicator": "1",
+    "cardPresentIndicator": "1",
+    "transactionStatusIndicator": "0",
+    "transactionSecurityIndicator": "0",
+    "cardholderActivatedTerminalIndicator": "0",
+    "cardholderIdMethod": "0",
+    "cardholderAuthEntity": "9",
+    "posControlSetup": "UNKNOWN",
+    "termType": "G",
+    "posUserId": ""
+  },
+  "trnDates": {
+    "transmissionDttm": "20260216134355",
+    "localDttm": "20260216134355",
+    "transactionTimeout": "20990101102000",
+    "validateTransactionTimeout": false
+  },
+  "amounts": {
+    "primary": {
+      "value": 9548,
+      "currency": "EUR"
+    },
+    "amountBill": {
+      "value": 6211,
+      "currency": "EUR"
+    },
+    "balance": {
+      "value": 19108,
+      "currency": "EUR"
+    },
+    "requestedAmount": {
+      "value": 43549,
+      "currency": "EUR"
+    },
+    "additAmounts": [
+      {
+        "type": "FD",
+        "sign": "D",
+        "amount": {
+          "value": 728,
+          "currency": "EUR"
+        }
+      },
+      {
+        "type": "TP",
+        "sign": "D",
+        "amount": {
+          "value": 87522,
+          "currency": "EUR"
+        }
+      }
+    ]
+  },
+  "specialProcessing": {
+    "ecommerce": {
+      "ecommerceMethod": {
+        "ecommerceType": "STANDART",
+        "threeDsProtocol": 2,
+        "cvc": "eciCode_doNtmwTrog",
+        "xid": "Y",
+        "cavv": "Y",
+        "tavv": "Y",
+        "eciCode": "Y",
+        "masterpass": true,
+        "masterpassWalletId": "masterPassWalletId_pcPbFZOAFs",
+        "tokenizedWallet": "ANDRP",
+        "phoneNo": "phoneNumber_GxxlpCcXqE",
+        "dsTrxId": "dsTrxId_BSCcEMmviC",
+        "traceId": "traceId_wDIHPZlscX",
+        "threeDsAuthMethod": "threeDsAuthMethod_zWFNjlsBYY",
+        "cavvRc": "cavvRc_FgQDKKtMwn",
+        "ucafInd": "ucafind_PstzjrUEVe",
+        "ecomSecLvlInd": "ecomSecLvlInd_kWOBXxxXlq",
+        "serviceInd": "serviceInd_FywILOTlTy",
+        "validCode": "validCode_HaeOZNDpPT",
+        "authMetodType": "PUSH_CONFIRMATION",
+        "ecomType": "L",
+        "ecomLegacy": "ECOMLEGACY{|Y|STANDART|_3DS2|Y|Y|Y|Y|true|ANDROID_PAY|masterPassWalletId_pcPbFZOAFs|phoneNumber_GxxlpCcXqE|dsTrxId_BSCcEMmviC|traceId_wDIHPZlscX|threeDsAuthMethod_zWFNjlsBYY|cavvRc_FgQDKKtMwn|ucafind_PstzjrUEVe|ecomSecLvlInd_kWOBXxxXlq|serviceInd_FywILOTlTy|validCode_HaeOZNDpPT|PUSH_CONFIRMATION}"
+      }
+    },
+    "installmentProc": {
+      "installmentIndicator": "CONF",
+      "type": "21",
+      "paymentOption": "B",
+      "receiptText": "receiptText_fVXXCImEED",
+      "installmentMcFormat1": [
+        {
+          "numOfInst": 5282,
+          "interestRate": 2848,
+          "instFee": 20,
+          "annualPercRate": 50,
+          "firstInstAmount": 62459,
+          "subseqInstAmount": 2657,
+          "totalAmountDue": 76048,
+          "firstPaymentDate": "2026-02-16T13:43:55.312928241",
+          "gratuityNumber": 9444,
+          "gratuityPeriod": "D",
+          "interestRatePeriod": "M"
+        }
+      ],
+      "installmentMcFormat2": {
+        "minNumOfInst": 30,
+        "maxNumOfInst": 50,
+        "interestRate": 1507,
+        "instFee": 90666,
+        "annualPercRate": 1516,
+        "totalAmountDue": 50,
+        "numOfInst": 3303,
+        "firstPaymentDate": "2026-02-16T13:43:55.313601126",
+        "gratuityNumber": 7370,
+        "gratuityPeriod": "D",
+        "interestRatePeriod": "M"
+      }
+    },
+    "strongCustomerAuthentication": {
+      "singleTapSupported": true,
+      "subsequentTrx": true,
+      "issuerRespCodeSCA": "NONESCA"
+    },
+    "dcc": {
+      "dccId": 19497,
+      "dccAcqId": "UNKNOWN",
+      "dccCode": "dccCode_cdVoEKYsyJ",
+      "dccTrxType": "PAYMENT",
+      "dccRequest": {
+        "deviceType": "P",
+        "termCurrency": "XXX",
+        "termCountry": "UNDEFINED",
+        "cardCurrency": "XXX",
+        "cardCountry": "UNDEFINED"
+      },
+      "dccOffer": {
+        "cardType": "U",
+        "currency": "XXX",
+        "ecbUsed": false,
+        "language": "",
+        "description": "",
+        "euState": false
+      },
+      "dccResult": "CUSTOMER_ALLOWED",
+      "issuerResult": "ISSUER_ACCEPTED",
+      "customerAccepted": true,
+      "dccStatus": "OFFER",
+      "origRequestId": 61704,
+      "offerResponseType": "DCC_OFFER",
+      "exRateByTermEnable": true,
+      "sendConfirmation": true,
+      "responseStatus": "D"
+    },
+    "digitalWallet": {
+      "par": "par_ETYdNMwNMV",
+      "embossedPan": "emboss************jkDn",
+      "embossedExpiration": "empossedExpiration_MhLiTrzvKN",
+      "expUuid": "718f33ea-292c-4f9a-8faa-9857ec35f8c8"
+    },
+    "surcharge": {
+      "surchargeIndicator": false,
+      "cardBrandScheme": "",
+      "selectedScheme": "",
+      "aid": "",
+      "selectedSchemeMode": "NOT_SELECTED"
+    },
+    "softPos": {
+      "posUserId": "0123456",
+      "posVersion": "1",
+      "deviceOsVersion": "1",
+      "deviceModel": "1",
+      "deviceIpAddress": "192.168.0.1",
+      "sdkId": "",
+      "customerId": ""
+    }
+  },
+  "procResult": {
+    "state": "open",
+    "responseCode": "00",
+    "approvalCode": "approvalCode_ojzZsSpQku",
+    "responseData": {
+      "responseData": "responseData_souLygoTEq",
+      "responseData2": "",
+      "responseData3": "",
+      "responseData4": "",
+      "responseData5": ""
+    },
+    "issuerRespCode": "issuerRespCode_XOlWEYmTRv",
+    "issuerRespMessages": {
+      "cardholderReceipt": "issuerResponseMessage_DxUlXDiZdE",
+      "cardAcceptorReceipt": "",
+      "cardholderDisplay": "",
+      "cardAcceptorDisplay": "",
+      "advertisingText": ""
+    },
+    "issuerRespDetail": "issuerRespDetail_BiWxLEzzUR",
+    "issuerTrxId": "62338",
+    "varc": "varc_cfRaULCFXK",
+    "processorId": "processorId_UIXknfsErZ",
+    "tlid": "tlid_SrmwQsfFze",
+    "traceId": "traceId_lWBuHcBKmA",
+    "cardIssuerFiid": "cardIssuerFiid_povEiKNFJN",
+    "cardLogicalNetwork": "cardLogicalNetwork_mkPxuTmkUE",
+    "issuerPreauthToken": "issuerPreauthToken_xJIhPHVjfN",
+    "usedSubSeqRoute": "usedSubSeqRoute_HwTBFWEQKV",
+    "merchantAdviceResponse": {
+      "responseCategoryCode": " ",
+      "cardStatus": " ",
+      "cardRestrictionReasonCode": " ",
+      "accountStatus": " ",
+      "retryTime": {
+        "value": 0,
+        "timeUnit": " "
+      },
+      "additionalResponseInfoCode": " ",
+      "verificationEntity": " "
+    },
+    "scheme": {
+
+    },
+    "secondApprovalCode": "Scheme",
+    "outChanResponseDttm": "20260216134355",
+    "tlidIndicator": "NONE",
+    "replacementTlid": "replacementTlid_VZVXoFjwIu"
+  },
+  "original": {
+    "atrid": "08774",
+    "astrid": 6732308650454901422,
+    "processing": {
+      "transactionProcessingType": "PURCHASE_ONLINE",
+      "resend": {
+        "type": "AUTO",
+        "sendCounter": 3,
+        "firstSend": "20260216134255",
+        "lastSend": "20260216134325",
+        "nextSend": "20260216134425",
+        "lastSendResult": "FAIL_TEMPORARY",
+        "lastSendErrorMessage": "260216-134255"
+      },
+      "trnIds": {
+        "dstStan": 64250,
+        "acqTrxId": "6179",
+        "rrn": "rrn_zIPxdScDCh",
+        "inChanRrn": "acquirerTrxId",
+        "vs": "vs_ZdCSTanBSV",
+        "receipt": "receipt_TGpioTjRkk",
+        "rid": "",
+        "refundId": 55650,
+        "vs2": "",
+        "inReconciliationId": "",
+        "outReconciliationId": "[short_SCElGxZvLV",
+        "cardholderStatementDescriptor": {
+
+        },
+        "requestIdMZ": "static_wnghEErZvO]"
+      },
+      "processingIds": {
+        "processorName": "processorName_ddZpVmzOmp",
+        "processorGroup": "processorGroup_xqmujxcaPs",
+        "sourceChannelName": "sourceChannel_WxCiocBasq",
+        "nodeName": "nodeName_DWDIvguzEJ",
+        "connName": "connName_YTWiJqSSYm",
+        "srcProtoFamily": "SPDH",
+        "cardOnFileCode": "cardOnFileCode_NHciQpQWXW",
+        "coreVersion": "codeVersion_fLizirvFPG",
+        "offlineAuthentication": "offlineAuthentication_LOJoQknWcx"
+      },
+      "indicators": {
+        "draftCaptureFlag": "1",
+        "partialAuthIndicator": "F",
+        "subSeqRouteIndicator": "",
+        "processingMethodIndicator": "DEF",
+        "manualConfirmationVoice": false,
+        "processorTokenRequest": false,
+        "cardOnFile": "UNKNOWN",
+        "kafkaModeFlag": "STANDARD"
+      },
+      "emvSmartCardScheme": "02",
+      "accountType": {
+        "primary": "Default",
+        "secondary": "Default"
+      },
+      "batchInfo": {
+        "batchId": "",
+        "idInBatch": "",
+        "cutoverCode": ""
+      },
+      "settlementCtrx": {
+        "idx1": "",
+        "idx2": "",
+        "idx3": "",
+        "addToSettlement": true,
+        "singleMessage": false
+      },
+      "tags": [
+
+      ],
+      "preAuth": {
+        "preAuthUuid": "PreAuthUuid_vLwmFfsVeM",
+        "amountHold": 110,
+        "amountCompleted": 111,
+        "currency": "EUR",
+        "issuerTrxId": "issuerTrxId_FLiVIKBeyi",
+        "cardPresent": true,
+        "holdTime": 1589,
+        "holdInterval": " "
+      },
+      "fromDisk": true,
+      "deliveryStatus": "UNDELIVERED"
+    },
+    "cadCodes": {
+      "idCad": "orignIdCad_yPXvEygVLD",
+      "merchantCode": "merchantCode_yegtqbxalm",
+      "networkCode": "networkCode_DmebROHJgC",
+      "mccCode": "mcc_oJIrHgRMhk",
+      "issuerMerchantId": "issuerMerchantId_KnkmMWUDfu",
+      "issuerTerminalId": "issuerTerminalId_trvUPckvad",
+      "orgUnitCode": "orgUnitCode_pnuUkYCKDa",
+      "postalCode": "postalCode_zEDnrmNlBp",
+      "termCapability": {
+        "cardDataInputCapability": "5",
+        "cardCaptureCapability": "1",
+        "terminalOperatingEnviroment": "1",
+        "termDataOuputCapability": "0",
+        "pinCaptureCapability": "C",
+        "cardHolderAuthCapability": "5"
+      }
+    },
+    "cardholder": {
+      "pan": "074447**838",
+      "track2": "track2_*NCvD*****?",
+      "cardTypeCode": "cardTypeCode_vORbUwucZD"
+    },
+    "posInfo": {
+      "posEntryMode": {
+        "panEntryMode": "00",
+        "pinEntryMode": "0"
+      },
+      "posConditionCode": "",
+      "cardHolderPresentIndicator": "1",
+      "cardPresentIndicator": "1",
+      "transactionStatusIndicator": "0",
+      "transactionSecurityIndicator": "0",
+      "cardholderActivatedTerminalIndicator": "0",
+      "cardholderIdMethod": "0",
+      "cardholderAuthEntity": "9",
+      "posControlSetup": "UNKNOWN",
+      "termType": "G",
+      "posUserId": ""
+    },
+    "trnDates": {
+      "transmissionDttm": "20260216134355",
+      "localDttm": "20260216134355",
+      "transactionTimeout": "20990101102000",
+      "validateTransactionTimeout": false
+    },
+    "amounts": {
+      "primary": {
+        "value": 42725,
+        "currency": "EUR"
+      },
+      "amountBill": {
+        "value": 87096,
+        "currency": "EUR"
+      },
+      "balance": {
+        "value": 6276,
+        "currency": "EUR"
+      },
+      "requestedAmount": {
+        "value": 89221,
+        "currency": "EUR"
+      },
+      "additAmounts": [
+        {
+          "type": "FD",
+          "sign": "D",
+          "amount": {
+            "value": 11108,
+            "currency": "EUR"
+          }
+        },
+        {
+          "type": "TP",
+          "sign": "D",
+          "amount": {
+            "value": 10798,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    "specialProcessing": {
+      "ecommerce": {
+        "ecommerceMethod": {
+          "ecommerceType": "STANDART",
+          "threeDsProtocol": 2,
+          "cvc": "eciCode_oLIfiXOvhd",
+          "xid": "Y",
+          "cavv": "Y",
+          "tavv": "Y",
+          "eciCode": "Y",
+          "masterpass": true,
+          "masterpassWalletId": "masterPassWalletId_FUmLMTDYZS",
+          "tokenizedWallet": "ANDRP",
+          "phoneNo": "phoneNumber_xOFMveXvIu",
+          "dsTrxId": "dsTrxId_iMvOKBgvrx",
+          "traceId": "traceId_RiEEYvygAs",
+          "threeDsAuthMethod": "threeDsAuthMethod_uGdEDUdFlS",
+          "cavvRc": "cavvRc_QOtnCrltTg",
+          "ucafInd": "ucafind_PUxdHnpWlC",
+          "ecomSecLvlInd": "ecomSecLvlInd_ttUchKuUuH",
+          "serviceInd": "serviceInd_SpGmPcqRyK",
+          "validCode": "validCode_BVBOKqTeMV",
+          "authMetodType": "PUSH_CONFIRMATION",
+          "ecomType": "L",
+          "ecomLegacy": "ECOMLEGACY{|Y|STANDART|_3DS2|Y|Y|Y|Y|true|ANDROID_PAY|masterPassWalletId_FUmLMTDYZS|phoneNumber_xOFMveXvIu|dsTrxId_iMvOKBgvrx|traceId_RiEEYvygAs|threeDsAuthMethod_uGdEDUdFlS|cavvRc_QOtnCrltTg|ucafind_PUxdHnpWlC|ecomSecLvlInd_ttUchKuUuH|serviceInd_SpGmPcqRyK|validCode_BVBOKqTeMV|PUSH_CONFIRMATION}"
+        }
+      },
+      "installmentProc": {
+        "installmentIndicator": "CONF",
+        "type": "21",
+        "paymentOption": "B",
+        "receiptText": "receiptText_rypjPegtDh",
+        "installmentMcFormat1": [
+          {
+            "numOfInst": 5601,
+            "interestRate": 2397,
+            "instFee": 20,
+            "annualPercRate": 50,
+            "firstInstAmount": 7125,
+            "subseqInstAmount": 5279,
+            "totalAmountDue": 36446,
+            "firstPaymentDate": "2026-02-16T13:43:55.338181376",
+            "gratuityNumber": 5015,
+            "gratuityPeriod": "D",
+            "interestRatePeriod": "M"
+          }
+        ],
+        "installmentMcFormat2": {
+          "minNumOfInst": 30,
+          "maxNumOfInst": 50,
+          "interestRate": 491,
+          "instFee": 2582,
+          "annualPercRate": 5590,
+          "totalAmountDue": 50,
+          "numOfInst": 670,
+          "firstPaymentDate": "2026-02-16T13:43:55.338199881",
+          "gratuityNumber": 7783,
+          "gratuityPeriod": "D",
+          "interestRatePeriod": "M"
+        }
+      },
+      "strongCustomerAuthentication": {
+        "singleTapSupported": true,
+        "subsequentTrx": true,
+        "issuerRespCodeSCA": "NONESCA"
+      },
+      "dcc": {
+        "dccId": 85,
+        "dccAcqId": "UNKNOWN",
+        "dccCode": "dccCode_ckTQHdiKdZ",
+        "dccTrxType": "PAYMENT",
+        "dccRequest": {
+          "deviceType": "P",
+          "termCurrency": "XXX",
+          "termCountry": "UNDEFINED",
+          "cardCurrency": "XXX",
+          "cardCountry": "UNDEFINED"
+        },
+        "dccOffer": {
+          "cardType": "U",
+          "currency": "XXX",
+          "ecbUsed": false,
+          "language": "",
+          "description": "",
+          "euState": false
+        },
+        "dccResult": "CUSTOMER_ALLOWED",
+        "issuerResult": "ISSUER_ACCEPTED",
+        "customerAccepted": true,
+        "dccStatus": "OFFER",
+        "origRequestId": 68014,
+        "offerResponseType": "DCC_OFFER",
+        "exRateByTermEnable": true,
+        "sendConfirmation": true,
+        "responseStatus": "D"
+      },
+      "digitalWallet": {
+        "par": "par_UOZRZNLbDa",
+        "embossedPan": "emboss************oetX",
+        "embossedExpiration": "empossedExpiration_aMJSpFLRLm",
+        "expUuid": "5ad2703c-3865-4d6f-93f2-5ece909f7489"
+      },
+      "surcharge": {
+        "surchargeIndicator": false,
+        "cardBrandScheme": "",
+        "selectedScheme": "",
+        "aid": "",
+        "selectedSchemeMode": "NOT_SELECTED"
+      },
+      "softPos": {
+        "posUserId": "0123456",
+        "posVersion": "1",
+        "deviceOsVersion": "1",
+        "deviceModel": "1",
+        "deviceIpAddress": "192.168.0.1",
+        "sdkId": "",
+        "customerId": ""
+      }
+    },
+    "procResult": {
+      "state": "open",
+      "responseCode": "00",
+      "approvalCode": "approvalCode_NciZFEwFtD",
+      "responseData": {
+        "responseData": "responseData_lErPSTYOuu",
+        "responseData2": "",
+        "responseData3": "",
+        "responseData4": "",
+        "responseData5": ""
+      },
+      "issuerRespCode": "issuerRespCode_ScungEpMNe",
+      "issuerRespMessages": {
+        "cardholderReceipt": "issuerResponseMessage_IKizHZBfPu",
+        "cardAcceptorReceipt": "",
+        "cardholderDisplay": "",
+        "cardAcceptorDisplay": "",
+        "advertisingText": ""
+      },
+      "issuerRespDetail": "issuerRespDetail_iITOoNjITC",
+      "issuerTrxId": "68120",
+      "varc": "varc_kuvdKuiyiw",
+      "processorId": "processorId_ZBEsyTtupv",
+      "tlid": "tlid_hCBgaxTNGp",
+      "traceId": "traceId_QpVYoqVWtA",
+      "cardIssuerFiid": "cardIssuerFiid_cHTVFWCSru",
+      "cardLogicalNetwork": "cardLogicalNetwork_TggoiXrkBP",
+      "issuerPreauthToken": "issuerPreauthToken_EoXNCTcYnZ",
+      "usedSubSeqRoute": "usedSubSeqRoute_dBCVZNAKIJ",
+      "merchantAdviceResponse": {
+        "responseCategoryCode": " ",
+        "cardStatus": " ",
+        "cardRestrictionReasonCode": " ",
+        "accountStatus": " ",
+        "retryTime": {
+          "value": 0,
+          "timeUnit": " "
+        },
+        "additionalResponseInfoCode": " ",
+        "verificationEntity": " "
+      },
+      "scheme": {
+
+      },
+      "secondApprovalCode": "Scheme",
+      "outChanResponseDttm": "20260216134355",
+      "tlidIndicator": "NONE",
+      "replacementTlid": "replacementTlid_IvgdSlUCSB"
+    },
+    "settlementState": "settled",
+    "settlementFiles": [
+
+    ]
+  },
+  "properties": [
+
+  ],
+  "industry": {
+
+  },
+  "sourceChannelIndex": {
+    "type": "STRING"
+  }
+}
