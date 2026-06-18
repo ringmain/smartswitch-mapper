@@ -2,50 +2,66 @@
   "fieldName" : "Amount1",
   "ctrxPath" : "amounts/primary/value",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "CurrencyCode",
   "ctrxPath" : "amounts/primary/currency",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "POSEntryMode",
   "ctrxPath" : "posInfo/posEntryMode/panEntryMode",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "POSEntryMode",
   "ctrxPath" : "posInfo/posEntryMode/pinEntryMode",
   "channelDialect" : "GENERIC",
-  "isAuto" : null
-}, {
-  "fieldName" : "ApprovalCode",
-  "ctrxPath" : "procResult/approvalCode",
-  "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "DccResult",
   "ctrxPath" : "original/specialProcessing/dcc/dccResult",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "DccIdentifier",
   "ctrxPath" : "specialProcessing/dcc/dccId",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "Track1",
   "ctrxPath" : "trid",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "ProductSFIDS6",
   "ctrxPath" : "processing",
   "channelDialect" : "GENERIC",
+  "type" : null,
   "isAuto" : null
 }, {
   "fieldName" : "ApprovalCode",
   "ctrxPath" : "procResult/approvalCode",
   "channelDialect" : "AUTO_SPDH_GENERIC",
+  "type" : null,
+  "isAuto" : null
+}, {
+  "fieldName" : "ApprovalCode",
+  "ctrxPath" : "procResult/approvalCode",
+  "channelDialect" : "GENERIC",
+  "type" : "RESPONSE",
+  "isAuto" : null
+}, {
+  "fieldName" : "ApprovalCode",
+  "ctrxPath" : "procResult/approvalCode",
+  "channelDialect" : "GENERIC",
+  "type" : "REQUEST",
   "isAuto" : null
 } ]

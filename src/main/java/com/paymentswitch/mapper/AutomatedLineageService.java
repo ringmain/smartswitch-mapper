@@ -39,10 +39,10 @@ public class AutomatedLineageService {
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.find()) {
                         String spdhTag = matcher.group(1);
-                        String inferredCtrxPath = inferInboundCtrxPath(line, spdhTag);
+                        String inferredCtrxPath = inferInboundCtrxPath(line); // Removed 'spdhTag' parameter
                         if (inferredCtrxPath != null) {
                             // isAuto flag set to TRUE
-                            mappings.add(new TransformerMapping(spdhTag, inferredCtrxPath, "AUTO_SPDH_GENERIC", true));
+                            mappings.add(new TransformerMapping(spdhTag, inferredCtrxPath, "AUTO_SPDH_GENERIC", "REQUEST", true));
                         }
                     }
                 }
@@ -70,10 +70,10 @@ public class AutomatedLineageService {
                     Matcher matcher = pattern.matcher(line);
                     if (matcher.find()) {
                         String isoField = matcher.group(1);
-                        String inferredCtrxPath = inferOutboundCtrxPath(line, isoField);
+                        String inferredCtrxPath = inferOutboundCtrxPath(isoField); // Removed 'line' parameter
                         if (inferredCtrxPath != null) {
                             // isAuto flag set to TRUE
-                            mappings.add(new OutboundMapping(isoField, inferredCtrxPath, "AUTO_BIC_ISO_GENERIC", true));
+                            mappings.add(new OutboundMapping(isoField, inferredCtrxPath, "AUTO_BIC_ISO_GENERIC", "REQUEST",true));
                         }
                     }
                 }
@@ -84,7 +84,8 @@ public class AutomatedLineageService {
         return mappings;
     }
 
-    private String inferInboundCtrxPath(String codeLine, String tag) {
+    // Removed unused 'tag' parameter
+    private String inferInboundCtrxPath(String codeLine) {
         String lowerLine = codeLine.toLowerCase();
         if (lowerLine.contains("track1")) return "cardholder/track1";
         if (lowerLine.contains("track2")) return "cardholder/track2";
@@ -100,7 +101,8 @@ public class AutomatedLineageService {
         return null;
     }
 
-    private String inferOutboundCtrxPath(String codeLine, String field) {
+    // Removed unused 'codeLine' parameter
+    private String inferOutboundCtrxPath(String field) {
         if (field.contains("processingCode")) return "processing/procType";
         if (field.contains("amount")) return "amounts/primary/value";
         if (field.contains("dateTimeTransmission")) return "trnDates/transmissionDttm";

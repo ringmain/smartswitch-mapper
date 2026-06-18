@@ -37,30 +37,40 @@ export const laneGap = 280;
 export const ROW_HEIGHT = 40;
 export const ROW_STRIDE = 48;
 
-// --- DUAL SIDE-BORDER PORTS (Fragment Strategy preserves original styles) ---
 export const customNodeTypes = {
     spdh: ({ data }: NodeProps) => (
         <>
-            <Handle type="source" position={Position.Right} id="top" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
-            <Handle type="source" position={Position.Right} id="bot" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+            {data.showHandles && (
+                <>
+                    <Handle type="source" position={Position.Right} id="top" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+                    <Handle type="source" position={Position.Right} id="bot" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+                </>
+            )}
             {data.label as React.ReactNode}
         </>
     ),
     ctrx: ({ data }: NodeProps) => (
         <>
-            {/* Left Border Handles */}
-            <Handle type="target" position={Position.Left} id="top-in" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
-            <Handle type="target" position={Position.Left} id="bot-out" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
-            {/* Right Border Handles */}
-            <Handle type="source" position={Position.Right} id="top-out" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
-            <Handle type="source" position={Position.Right} id="bot-in" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+            {data.showHandles && (
+                <>
+                    <Handle type="target" position={Position.Left} id="top-in" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
+                    <Handle type="target" position={Position.Left} id="bot-out" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
+
+                    <Handle type="source" position={Position.Right} id="top-out" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+                    <Handle type="source" position={Position.Right} id="bot-in" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', right: '-4px', zIndex: 10 }} />
+                </>
+            )}
             {data.label as React.ReactNode}
         </>
     ),
     outbound: ({ data }: NodeProps) => (
         <>
-            <Handle type="target" position={Position.Left} id="top" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
-            <Handle type="target" position={Position.Left} id="bot" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
+            {data.showHandles && (
+                <>
+                    <Handle type="target" position={Position.Left} id="top" style={{ top: '25%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
+                    <Handle type="target" position={Position.Left} id="bot" style={{ top: '75%', background: '#475569', width: '8px', height: '8px', border: '1px solid #fff', left: '-4px', zIndex: 10 }} />
+                </>
+            )}
             {data.label as React.ReactNode}
         </>
     )
@@ -129,6 +139,7 @@ export const useMappingEngine = (params: EngineParams) => {
     return useMemo(() => {
         const treeStartX = (activeViewportSpaceX - cNodeW) / 2;
         const baseAnchorX = treeStartX - laneGap - sNodeW;
+        const showHandles = inChannelDialect !== 'NONE' || outChannelDialect !== 'NONE';
 
         const generatedNodes: Node[] = [];
         const backgroundEdges: Edge[] = [];
@@ -199,7 +210,7 @@ export const useMappingEngine = (params: EngineParams) => {
             }
             if (currentCursor && currentCursor.isLeafMarker === 'true') semanticLeafDef = true;
 
-            return bestMatch ? { fieldName: fName, resolvedTargetId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase } : null;
+            return bestMatch ? { fieldName: fName, resolvedTargetId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, type: l.type || 'REQUEST' } : null;
         }).filter(w => w !== null);
 
         const outboundWires = outboundLinks.map(l => {
@@ -222,7 +233,7 @@ export const useMappingEngine = (params: EngineParams) => {
             }
             if (currentCursor && currentCursor.isLeafMarker === 'true') semanticLeafDef = true;
 
-            return bestMatch ? { fieldName: fName, resolvedSourceId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase } : null;
+            return bestMatch ? { fieldName: fName, resolvedSourceId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, type: l.type || 'REQUEST' } : null;
         }).filter(w => w !== null);
 
         if (hideUnmapped) {
@@ -293,6 +304,7 @@ export const useMappingEngine = (params: EngineParams) => {
                 position: { x: baseAnchorX, y: idx * ROW_STRIDE + 100 },
                 type: 'spdh',
                 data: {
+                    showHandles,
                     label: (
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '100%' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
@@ -324,7 +336,7 @@ export const useMappingEngine = (params: EngineParams) => {
             generatedNodes.push({
                 id: item.id, position: { x: treeStartX + (item.level * indentW), y: rowIndex * ROW_STRIDE + 100 },
                 type: 'ctrx',
-                data: { label: item.label, path: item.path, isLeaf: item.isLeaf, meta: item.meta, type: 'ctrx' },
+                data: { label: item.label, path: item.path, isLeaf: item.isLeaf, meta: item.meta, type: 'ctrx', showHandles },
                 style: {
                     background: item.isLeaf ? (isHighlighted ? '#34d399' : '#ffffff') : (isHighlighted ? '#10b981' : '#f0fdf4'),
                     border: item.isLeaf ? (isHighlighted ? '2px solid #047857' : '1px solid #cbd5e1') : (isHighlighted ? '2px solid #065f46' : '1px solid #6ee7b7'),
@@ -341,7 +353,7 @@ export const useMappingEngine = (params: EngineParams) => {
             generatedNodes.push({
                 id: `outbound-${field.name}`, position: { x: outStartX, y: idx * ROW_STRIDE + 100 },
                 type: 'outbound',
-                data: { label: field.name, type: 'outbound', raw: field },
+                data: { label: field.name, type: 'outbound', raw: field, showHandles },
                 style: {
                     background: isHighlighted ? '#818cf8' : '#f5f3ff', border: isHighlighted ? '2px solid #4338ca' : '1px solid #c7d2fe',
                     color: isHighlighted ? '#ffffff' : '#4338ca', borderRadius: '6px', height: `${ROW_HEIGHT}px`, padding: '0 12px', display: 'flex', alignItems: 'center', boxSizing: 'border-box', fontSize: '12px', fontWeight: 'bold', width: oNodeW, cursor: 'pointer',
@@ -355,7 +367,7 @@ export const useMappingEngine = (params: EngineParams) => {
         inboundWires.forEach((wire, idx) => {
             if (!wire) return;
             const targetId = wire.resolvedTargetId;
-            const phase = wire.phase;
+            const type = wire.type;
 
             const matchingSpdhNodes = generatedNodes.filter(n => n.data.type === 'spdh' && (n.data.raw as any).name === wire.fieldName);
 
@@ -366,19 +378,19 @@ export const useMappingEngine = (params: EngineParams) => {
                     const slot = idx % 5; const routeX = baseAnchorX + sNodeW + 40 + (slot * 45);
                     const targetsParent = wire.targetsParentDirectly;
                     const typeModifier = wire.isAuto ? 'auto' : 'manual';
-                    const strokeColor = targetsParent ? '#f97316' : (isActive ? '#e11d48' : '#0284c7');
 
-                    // Anything explicitly marked 'RESPONSE' goes bottom. Everything else goes top.
-                    const isReq = wire.phase !== 'RESPONSE';
+                    const isReq = wire.type !== 'RESPONSE';
+                    const strokeColor = isReq ? (isActive ? '#22c55e' : '#4ade80') : (isActive ? '#ef4444' : '#f87171');
+
                     const className = targetsParent
                         ? (isActive ? `ctrx-orange-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-orange-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`)
                         : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-blue-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
                     const edgeSourceHandle = isReq ? 'top' : 'bot';
-                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out';
+                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out'; // <-- FIXED: Pointing to CTRX Left-Side Target
 
                     const wirePayload: Edge = {
-                        id: `inbound-highway-wire-${phase}-${idx}-${matchIdx}`,
+                        id: `inbound-highway-wire-${type}-${idx}-${matchIdx}`,
                         source: sourceId, target: targetId,
                         sourceHandle: edgeSourceHandle, targetHandle: edgeTargetHandle,
                         type: 'routed', data: { routeX },
@@ -393,26 +405,26 @@ export const useMappingEngine = (params: EngineParams) => {
             if (!wire) return;
             const sourceId = wire.resolvedSourceId;
             const targetId = `outbound-${wire.fieldName}`;
-            const phase = wire.phase;
+            const type = wire.type;
 
             if (activeNodeRegistry.has(sourceId) && activeNodeRegistry.has(targetId)) {
                 const isActive = activeCtrxPaths.has(sourceId.replace('ctrx-', '').toLowerCase()) && activeOutFields.has(wire.fieldName.toLowerCase());
                 const slot = idx % 5; const routeX = treeStartX + totalTreeW + 40 + (slot * 45);
                 const targetsParent = wire.targetsParentDirectly;
                 const typeModifier = wire.isAuto ? 'auto' : 'manual';
-                const strokeColor = targetsParent ? '#f97316' : (isActive ? '#e11d48' : '#6366f1');
 
-                // Anything explicitly marked 'RESPONSE' goes bottom. Everything else goes top.
-                const isReq = wire.phase !== 'RESPONSE';
+                const isReq = wire.type !== 'RESPONSE';
+                const strokeColor = isReq ? (isActive ? '#22c55e' : '#4ade80') : (isActive ? '#ef4444' : '#f87171');
+
                 const className = targetsParent
                     ? (isActive ? `ctrx-orange-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-orange-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`)
                     : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-indigo-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
-                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in';
+                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in'; // <-- FIXED: Pointing to CTRX Right-Side Source
                 const edgeTargetHandle = isReq ? 'top' : 'bot';
 
                 const wirePayload: Edge = {
-                    id: `outbound-highway-wire-${phase}-${idx}`,
+                    id: `outbound-highway-wire-${type}-${idx}`,
                     source: sourceId, target: targetId,
                     sourceHandle: edgeSourceHandle, targetHandle: edgeTargetHandle,
                     type: 'routed', data: { routeX },

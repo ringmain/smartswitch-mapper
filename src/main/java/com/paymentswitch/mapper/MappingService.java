@@ -59,7 +59,8 @@ public class MappingService {
         boolean exists = currentMappings.stream().anyMatch(m ->
                 m.ctrxPath().equalsIgnoreCase(newMapping.ctrxPath()) &&
                         m.fieldName().equalsIgnoreCase(newMapping.fieldName()) &&
-                        m.channelDialect().equalsIgnoreCase(newMapping.channelDialect())
+                        m.channelDialect().equalsIgnoreCase(newMapping.channelDialect()) &&
+                        (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(newMapping.type() != null ? newMapping.type() : "REQUEST")
         );
 
         if (!exists) {
@@ -74,7 +75,8 @@ public class MappingService {
         currentMappings.removeIf(m ->
                 m.ctrxPath().equalsIgnoreCase(targetMapping.ctrxPath()) &&
                         m.fieldName().equalsIgnoreCase(targetMapping.fieldName()) &&
-                        m.channelDialect().equalsIgnoreCase(targetMapping.channelDialect())
+                        m.channelDialect().equalsIgnoreCase(targetMapping.channelDialect()) &&
+                        (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(targetMapping.type() != null ? targetMapping.type() : "REQUEST")
         );
         saveMappingsToFile(transformerFile, currentMappings);
     }
@@ -87,7 +89,8 @@ public class MappingService {
                 targets.stream().anyMatch(t ->
                         m.ctrxPath().equalsIgnoreCase(t.ctrxPath()) &&
                                 m.fieldName().equalsIgnoreCase(t.fieldName()) &&
-                                m.channelDialect().equalsIgnoreCase(t.channelDialect())
+                                m.channelDialect().equalsIgnoreCase(t.channelDialect()) &&
+                                (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(t.type() != null ? t.type() : "REQUEST")
                 )
         );
         if (removedAny) saveMappingsToFile(transformerFile, currentMappings);
@@ -103,7 +106,8 @@ public class MappingService {
         boolean exists = currentMappings.stream().anyMatch(m ->
                 m.ctrxPath().equalsIgnoreCase(newMapping.ctrxPath()) &&
                         m.fieldName().equalsIgnoreCase(newMapping.fieldName()) &&
-                        m.channelDialect().equalsIgnoreCase(newMapping.channelDialect())
+                        m.channelDialect().equalsIgnoreCase(newMapping.channelDialect()) &&
+                        (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(newMapping.type() != null ? newMapping.type() : "REQUEST")
         );
 
         if (!exists) {
@@ -118,7 +122,8 @@ public class MappingService {
         currentMappings.removeIf(m ->
                 m.ctrxPath().equalsIgnoreCase(targetMapping.ctrxPath()) &&
                         m.fieldName().equalsIgnoreCase(targetMapping.fieldName()) &&
-                        m.channelDialect().equalsIgnoreCase(targetMapping.channelDialect())
+                        m.channelDialect().equalsIgnoreCase(targetMapping.channelDialect()) &&
+                        (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(targetMapping.type() != null ? targetMapping.type() : "REQUEST")
         );
         saveMappingsToFile(outboundFile, currentMappings);
     }
@@ -131,7 +136,8 @@ public class MappingService {
                 targets.stream().anyMatch(t ->
                         m.ctrxPath().equalsIgnoreCase(t.ctrxPath()) &&
                                 m.fieldName().equalsIgnoreCase(t.fieldName()) &&
-                                m.channelDialect().equalsIgnoreCase(t.channelDialect())
+                                m.channelDialect().equalsIgnoreCase(t.channelDialect()) &&
+                                (m.type() != null ? m.type() : "REQUEST").equalsIgnoreCase(t.type() != null ? t.type() : "REQUEST")
                 )
         );
         if (removedAny) saveMappingsToFile(outboundFile, currentMappings);
