@@ -10,11 +10,12 @@ import type { LeafParams, CommonElement } from './hooks/useMappingEngine';
 import TopNavigation from './components/TopNavigation';
 import InspectorSidebar from './components/InspectorSidebar';
 
-const RoutedLineageEdge = ({ id, sourceX, sourceY, targetX, targetY, data, className, style }: EdgeProps & { className?: string }) => {
+const RoutedLineageEdge = ({ id, sourceX, sourceY, targetX, targetY, sourceHandleId, data, className, style }: EdgeProps & { className?: string }) => {
     if (typeof sourceX !== 'number' || Number.isNaN(sourceX) || typeof sourceY !== 'number' || Number.isNaN(sourceY) || typeof targetX !== 'number' || Number.isNaN(targetX) || typeof targetY !== 'number' || Number.isNaN(targetY)) return null;
 
-    const phase = (data as any)?.phase;
-    const routeX = (data as any)?.routeX || (phase === 'REQUEST' ? sourceX + 45 : sourceX - 45);
+    // Geometry logic strictly follows the physical port it originates from
+    const isBot = sourceHandleId?.includes('bot');
+    const routeX = (data as any)?.routeX || (isBot ? sourceX - 45 : sourceX + 45);
 
     const path = `M ${sourceX} ${sourceY} L ${routeX} ${sourceY} L ${routeX} ${targetY} L ${targetX} ${targetY}`;
     return <BaseEdge id={id} path={path} style={style} markerEnd={undefined} className={className} />;
@@ -23,8 +24,8 @@ const edgeTypes = { routed: RoutedLineageEdge };
 
 // Validate Top/Bottom strict isolation
 const validateConnection = (connection: Connection) => {
-    const isTop = connection.sourceHandle?.startsWith('top') && connection.targetHandle?.startsWith('top');
-    const isBot = connection.sourceHandle?.startsWith('bot') && connection.targetHandle?.startsWith('bot');
+    const isTop = connection.sourceHandle?.includes('top') && connection.targetHandle?.includes('top');
+    const isBot = connection.sourceHandle?.includes('bot') && connection.targetHandle?.includes('bot');
     return Boolean(isTop || isBot);
 };
 
@@ -55,45 +56,65 @@ export default function App() {
     const [deletedInbound, setDeletedInbound] = useState<string[]>(() => JSON.parse(localStorage.getItem('deletedInbound') || '[]'));
     const [deletedOutbound, setDeletedOutbound] = useState<string[]>(() => JSON.parse(localStorage.getItem('deletedOutbound') || '[]'));
 
+    // Cache to remember manual bottom-connections until backend schema persists phase natively
+    const [localPhases, setLocalPhases] = useState<Record<string, string>>(() => JSON.parse(localStorage.getItem('localPhases') || '{}'));
+    const getPhaseKey = (fieldName: string, ctrxPath: string, dialect: string) => `${String(fieldName).trim()}|${String(ctrxPath).trim()}|${String(dialect).trim()}`.toLowerCase();
+
     const activeLineageLinks = useMemo(() => {
         const map = new Map<string, any>();
-        const getKey = (l: any) => `${String(l.fieldName || l.fidName || '').trim()}|${String(l.ctrxPath || '').trim()}|${String(l.channelDialect || '').trim()}|${String(l.mappingPhase)}`.toLowerCase();
 
         lineageLinks.forEach(l => {
+            const pKey = getPhaseKey(l.fieldName || l.fidName || '', l.ctrxPath || '', l.channelDialect || '');
+            const derivedPhase = l.mappingPhase || localPhases[pKey] || 'REQUEST'; // Fallback to REQUEST (Top)
+            const mapKey = `${pKey}|${derivedPhase}`;
+
             if (l.isAuto === true || l.isAuto === 'true') {
-                map.set(getKey(l), { ...l, isAuto: true, hasAuto: true, mappingPhase: l.mappingPhase });
+                map.set(mapKey, { ...l, isAuto: true, hasAuto: true, mappingPhase: derivedPhase });
             }
         });
 
         lineageLinks.forEach(l => {
             if (l.isAuto !== true && l.isAuto !== 'true') {
-                const key = getKey(l);
-                map.set(key, { ...l, isAuto: false, hasAuto: map.has(key), mappingPhase: l.mappingPhase });
+                const pKey = getPhaseKey(l.fieldName || l.fidName || '', l.ctrxPath || '', l.channelDialect || '');
+                const derivedPhase = l.mappingPhase || localPhases[pKey] || 'REQUEST';
+                const mapKey = `${pKey}|${derivedPhase}`;
+                map.set(mapKey, { ...l, isAuto: false, hasAuto: map.has(mapKey), mappingPhase: derivedPhase });
             }
         });
 
-        return Array.from(map.values()).filter(l => !(l.isAuto && deletedInbound.includes(getKey(l))));
-    }, [lineageLinks, deletedInbound]);
+        return Array.from(map.values()).filter(l => {
+            const pKey = getPhaseKey(l.fieldName || l.fidName || '', l.ctrxPath || '', l.channelDialect || '');
+            return !(l.isAuto && deletedInbound.includes(`${pKey}|${l.mappingPhase}`));
+        });
+    }, [lineageLinks, deletedInbound, localPhases]);
 
     const activeOutboundLinks = useMemo(() => {
         const map = new Map<string, any>();
-        const getKey = (l: any) => `${String(l.fieldName || '').trim()}|${String(l.ctrxPath || '').trim()}|${String(l.channelDialect || '').trim()}|${String(l.mappingPhase)}`.toLowerCase();
 
         outboundLinks.forEach(l => {
+            const pKey = getPhaseKey(l.fieldName || '', l.ctrxPath || '', l.channelDialect || '');
+            const derivedPhase = l.mappingPhase || localPhases[pKey] || 'REQUEST';
+            const mapKey = `${pKey}|${derivedPhase}`;
+
             if (l.isAuto === true || l.isAuto === 'true') {
-                map.set(getKey(l), { ...l, isAuto: true, hasAuto: true, mappingPhase: l.mappingPhase });
+                map.set(mapKey, { ...l, isAuto: true, hasAuto: true, mappingPhase: derivedPhase });
             }
         });
 
         outboundLinks.forEach(l => {
             if (l.isAuto !== true && l.isAuto !== 'true') {
-                const key = getKey(l);
-                map.set(key, { ...l, isAuto: false, hasAuto: map.has(key), mappingPhase: l.mappingPhase });
+                const pKey = getPhaseKey(l.fieldName || '', l.ctrxPath || '', l.channelDialect || '');
+                const derivedPhase = l.mappingPhase || localPhases[pKey] || 'REQUEST';
+                const mapKey = `${pKey}|${derivedPhase}`;
+                map.set(mapKey, { ...l, isAuto: false, hasAuto: map.has(mapKey), mappingPhase: derivedPhase });
             }
         });
 
-        return Array.from(map.values()).filter(l => !(l.isAuto && deletedOutbound.includes(getKey(l))));
-    }, [outboundLinks, deletedOutbound]);
+        return Array.from(map.values()).filter(l => {
+            const pKey = getPhaseKey(l.fieldName || '', l.ctrxPath || '', l.channelDialect || '');
+            return !(l.isAuto && deletedOutbound.includes(`${pKey}|${l.mappingPhase}`));
+        });
+    }, [outboundLinks, deletedOutbound, localPhases]);
 
     const hasOverrides = activeLineageLinks.some(l => l.hasAuto && !l.isAuto) || activeOutboundLinks.some(l => l.hasAuto && !l.isAuto);
     const hasHiddenAutos = deletedInbound.length > 0 || deletedOutbound.length > 0 || hasOverrides;
@@ -149,13 +170,13 @@ export default function App() {
     const handleConnect = (connection: Connection) => {
         if (!connection.source || !connection.target) return;
 
-        // Block invalid cross-plane mappings entirely
         if (!validateConnection(connection)) {
             alert("Connection Rejected: Top pins must connect to Top pins. Bottom pins must connect to Bottom pins.");
             return;
         }
 
-        const mappingPhase = connection.sourceHandle?.startsWith('top') ? 'REQUEST' : 'RESPONSE';
+        const isBot = connection.sourceHandle?.includes('bot');
+        const mappingPhase = isBot ? 'RESPONSE' : 'REQUEST';
 
         const spdhNode = connection.source.startsWith('spdh-') ? connection.source : (connection.target.startsWith('spdh-') ? connection.target : null);
         const ctrxNode = connection.source.startsWith('ctrx-') ? connection.source : (connection.target.startsWith('ctrx-') ? connection.target : null);
@@ -173,6 +194,12 @@ export default function App() {
 
             if (!window.confirm(`Confirm [${mappingPhase}] Inbound Connection?\n\nFrom Tag: ${spdhName}\nTo CTRX Node: ${ctrxPath}`)) return;
 
+            // Cache Phase Locally
+            const pKey = getPhaseKey(spdhName, ctrxPath, inChannelDialect);
+            const nextPhases = { ...localPhases, [pKey]: mappingPhase };
+            setLocalPhases(nextPhases);
+            localStorage.setItem('localPhases', JSON.stringify(nextPhases));
+
             apiClient.saveInboundMapping({ fieldName: spdhName, ctrxPath, channelDialect: inChannelDialect, mappingPhase }).then(() => loadData());
         }
 
@@ -187,6 +214,12 @@ export default function App() {
             }
 
             if (!window.confirm(`Confirm [${mappingPhase}] Outbound Connection?\n\nFrom CTRX Node: ${ctrxPath}\nTo Outbound Field: ${outFieldName}`)) return;
+
+            // Cache Phase Locally
+            const pKey = getPhaseKey(outFieldName, ctrxPath, outChannelDialect);
+            const nextPhases = { ...localPhases, [pKey]: mappingPhase };
+            setLocalPhases(nextPhases);
+            localStorage.setItem('localPhases', JSON.stringify(nextPhases));
 
             apiClient.saveOutboundMapping({ fieldName: outFieldName, ctrxPath, channelDialect: outChannelDialect, mappingPhase }).then(() => loadData());
         }
@@ -214,7 +247,8 @@ export default function App() {
 
     const deleteInboundMapping = (m: any) => {
         if (!window.confirm(`Are you sure you want to completely delete this connection?\n\nTag: ${m.fieldName}\n➔ CTRX: ${m.ctrxPath}`)) return;
-        const key = `${String(m.fieldName || m.fidName).trim()}|${String(m.ctrxPath).trim()}|${String(m.channelDialect).trim()}|${String(m.mappingPhase)}`.toLowerCase();
+        const pKey = getPhaseKey(m.fieldName || m.fidName || '', m.ctrxPath || '', m.channelDialect || '');
+        const key = `${pKey}|${String(m.mappingPhase)}`;
 
         if (m.isAuto) {
             const next = [...deletedInbound, key];
@@ -232,7 +266,8 @@ export default function App() {
 
     const deleteOutboundMapping = (m: any) => {
         if (!window.confirm(`Are you sure you want to completely delete this connection?\n\nCTRX: ${m.ctrxPath}\n➔ ISO Field: ${m.fieldName}`)) return;
-        const key = `${String(m.fieldName).trim()}|${String(m.ctrxPath).trim()}|${String(m.channelDialect).trim()}|${String(m.mappingPhase)}`.toLowerCase();
+        const pKey = getPhaseKey(m.fieldName || '', m.ctrxPath || '', m.channelDialect || '');
+        const key = `${pKey}|${String(m.mappingPhase)}`;
 
         if (m.isAuto) {
             const next = [...deletedOutbound, key];

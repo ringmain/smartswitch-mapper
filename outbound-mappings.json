@@ -23,4 +23,9 @@
   "ctrxPath" : "procResult/approvalCode",
   "channelDialect" : "GENERIC",
   "isAuto" : null
+}, {
+  "fieldName" : "f38_approvalCode",
+  "ctrxPath" : "procResult/approvalCode",
+  "channelDialect" : "AUTO_BIC_ISO_GENERIC",
+  "isAuto" : null
 } ]

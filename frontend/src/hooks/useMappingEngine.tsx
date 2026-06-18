@@ -198,7 +198,8 @@ export const useMappingEngine = (params: EngineParams) => {
                 else break;
             }
             if (currentCursor && currentCursor.isLeafMarker === 'true') semanticLeafDef = true;
-            return bestMatch ? { fieldName: fName, resolvedTargetId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase || 'REQUEST' } : null;
+
+            return bestMatch ? { fieldName: fName, resolvedTargetId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase } : null;
         }).filter(w => w !== null);
 
         const outboundWires = outboundLinks.map(l => {
@@ -220,7 +221,8 @@ export const useMappingEngine = (params: EngineParams) => {
                 else break;
             }
             if (currentCursor && currentCursor.isLeafMarker === 'true') semanticLeafDef = true;
-            return bestMatch ? { fieldName: fName, resolvedSourceId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase || 'REQUEST' } : null;
+
+            return bestMatch ? { fieldName: fName, resolvedSourceId: bestMatch.id, targetsParentDirectly: !semanticLeafDef, isAuto: !!l.isAuto, phase: l.mappingPhase } : null;
         }).filter(w => w !== null);
 
         if (hideUnmapped) {
@@ -366,13 +368,14 @@ export const useMappingEngine = (params: EngineParams) => {
                     const typeModifier = wire.isAuto ? 'auto' : 'manual';
                     const strokeColor = targetsParent ? '#f97316' : (isActive ? '#e11d48' : '#0284c7');
 
-                    const isReq = phase === 'REQUEST';
+                    // Anything explicitly marked 'RESPONSE' goes bottom. Everything else goes top.
+                    const isReq = wire.phase !== 'RESPONSE';
                     const className = targetsParent
                         ? (isActive ? `ctrx-orange-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-orange-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`)
                         : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-blue-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
                     const edgeSourceHandle = isReq ? 'top' : 'bot';
-                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out'; // FIXED: Response (bot) targets Left side handle (bot-out)
+                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out';
 
                     const wirePayload: Edge = {
                         id: `inbound-highway-wire-${phase}-${idx}-${matchIdx}`,
@@ -399,12 +402,13 @@ export const useMappingEngine = (params: EngineParams) => {
                 const typeModifier = wire.isAuto ? 'auto' : 'manual';
                 const strokeColor = targetsParent ? '#f97316' : (isActive ? '#e11d48' : '#6366f1');
 
-                const isReq = phase === 'REQUEST';
+                // Anything explicitly marked 'RESPONSE' goes bottom. Everything else goes top.
+                const isReq = wire.phase !== 'RESPONSE';
                 const className = targetsParent
                     ? (isActive ? `ctrx-orange-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-orange-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`)
                     : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-indigo-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
-                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in'; // FIXED: Response (bot) sources from Right side handle (bot-in)
+                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in';
                 const edgeTargetHandle = isReq ? 'top' : 'bot';
 
                 const wirePayload: Edge = {

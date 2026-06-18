@@ -43,4 +43,9 @@
   "ctrxPath" : "processing",
   "channelDialect" : "GENERIC",
   "isAuto" : null
+}, {
+  "fieldName" : "ApprovalCode",
+  "ctrxPath" : "procResult/approvalCode",
+  "channelDialect" : "AUTO_SPDH_GENERIC",
+  "isAuto" : null
 } ]
