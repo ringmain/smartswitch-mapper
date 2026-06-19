@@ -40,4 +40,16 @@
   "channelDialect" : "GENERIC",
   "type" : "REQUEST",
   "isAuto" : null
+}, {
+  "fieldName" : "f38_approvalCode",
+  "ctrxPath" : "trid",
+  "channelDialect" : "GENERIC",
+  "type" : "RESPONSE",
+  "isAuto" : null
+}, {
+  "fieldName" : "f38_approvalCode",
+  "ctrxPath" : "procResult/issuerRespCode",
+  "channelDialect" : "GENERIC",
+  "type" : "RESPONSE",
+  "isAuto" : null
 } ]

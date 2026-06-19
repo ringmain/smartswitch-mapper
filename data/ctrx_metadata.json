@@ -13,6 +13,13 @@
     "description" : "Snowflake ID",
     "exampleValue" : "8552542928355672322"
   },
+  "procResult/approvalCode" : {
+    "dataType" : "VARCHAR",
+    "dbTable" : "trx",
+    "length" : "10",
+    "description" : "Auto-linked to table [trx], column [approval_code] via schema definitions.",
+    "exampleValue" : "approvalCode_ojzZsSpQku"
+  },
   "specialProcessing/digitalWallet/par" : {
     "dataType" : "String",
     "dbTable" : "trx_proc_result",

@@ -374,7 +374,7 @@ export default function App() {
 
             <TopNavigation cNodeW={cNodeW} searchQuery={searchQuery} setSearchQuery={setSearchQuery} activeDialects={activeDialects} setActiveDialects={setActiveDialects} inChannelDialect={inChannelDialect} setInChannelDialect={setInChannelDialect} outChannelDialect={outChannelDialect} setOutChannelDialect={setOutChannelDialect} handleExpandAll={handleExpandAll} handleClearStates={handleClearStates} setExpandedPaths={setExpandedPaths} hideUnmapped={hideUnmapped} setHideUnmapped={setHideUnmapped} hasHiddenAutos={hasHiddenAutos} handleRestoreHiddenAutos={handleRestoreHiddenAutos} />
 
-            <div style={{ flexGrow: 1, width: '100%', display: 'flex', position: 'relative' }}>
+            <div style={{ flexGrow: 1, width: '100%', display: 'flex', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ flexGrow: 1, height: '100%', position: 'relative' }}>
                     <ReactFlow
                         nodes={nodes}
@@ -397,6 +397,7 @@ export default function App() {
                 <InspectorSidebar
                     selectedItemType={selectedItemType} selectedSpdhTag={selectedSpdhTag} selectedOutField={selectedOutField} selectedCtrxPath={selectedCtrxPath}
                     editingParams={editingParams} editingDesc={editingDesc} isSaving={isSaving} lineageLinks={activeLineageLinks} outboundLinks={activeOutboundLinks}
+                    spdhTagsList={spdhTagsList} outFieldsList={outFieldsList}
                     setEditingDesc={setEditingDesc} setEditingParams={setEditingParams} handleClearStates={handleClearStates} handleSpdhOrOutboundSave={handleSpdhOrOutboundSave} handleCtrxSave={handleCtrxSave}
                     deleteInboundMapping={deleteInboundMapping} deleteOutboundMapping={deleteOutboundMapping} convertToManualInbound={convertToManualInbound} convertToManualOutbound={convertToManualOutbound}
                     restoreAutoInboundMapping={restoreAutoInboundMapping} restoreAutoOutboundMapping={restoreAutoOutboundMapping}
