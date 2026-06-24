@@ -1,7 +1,7 @@
 {
   "processing/trnIds/dstStan" : {
     "dataType" : "INT",
-    "dbTable" : "ORACLE / MARIADB",
+    "dbTable" : "trx_proc_result",
     "length" : "11",
     "description" : "Linked to column [dst_stan] via DBeaver schema definitions.",
     "exampleValue" : "80560"
@@ -18,7 +18,7 @@
     "dbTable" : "trx",
     "length" : "10",
     "description" : "Auto-linked to table [trx], column [approval_code] via schema definitions.",
-    "exampleValue" : "approvalCode_ojzZsSpQku"
+    "exampleValue" : "123456"
   },
   "specialProcessing/digitalWallet/par" : {
     "dataType" : "String",

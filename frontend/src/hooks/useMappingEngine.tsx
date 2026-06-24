@@ -6,6 +6,7 @@ export interface LeafParams {
     dataType: string;
     length: string;
     dbTable: string;
+    dbColumn?: string; // Added to support explicit schema columns if provided
     exampleValue: string;
     description: string;
     isLeafMarker?: string;
@@ -387,7 +388,7 @@ export const useMappingEngine = (params: EngineParams) => {
                         : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-blue-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
                     const edgeSourceHandle = isReq ? 'top' : 'bot';
-                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out'; // <-- FIXED: Pointing to CTRX Left-Side Target
+                    const edgeTargetHandle = isReq ? 'top-in' : 'bot-out';
 
                     const wirePayload: Edge = {
                         id: `inbound-highway-wire-${type}-${idx}-${matchIdx}`,
@@ -420,7 +421,7 @@ export const useMappingEngine = (params: EngineParams) => {
                     ? (isActive ? `ctrx-orange-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-orange-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`)
                     : (isActive ? `ctrx-scarlet-highway-${typeModifier}-active${isReq ? '' : '-reverse'}` : `ctrx-indigo-highway-${typeModifier}-passive${isReq ? '' : '-reverse'}`);
 
-                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in'; // <-- FIXED: Pointing to CTRX Right-Side Source
+                const edgeSourceHandle = isReq ? 'top-out' : 'bot-in';
                 const edgeTargetHandle = isReq ? 'top' : 'bot';
 
                 const wirePayload: Edge = {

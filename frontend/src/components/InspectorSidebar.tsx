@@ -75,52 +75,66 @@ export default function InspectorSidebar({
         }
 
         return (
-            <div key={`${link.ctrxPath}-${link.fieldName}-${link.type}`} style={{ backgroundColor: '#f8fafc', padding: '10px', borderRadius: '4px', border: '1px solid #e2e8f0', marginBottom: '8px', fontSize: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontWeight: 'bold', color: '#334155', alignItems: 'center' }}>
+            <div key={`${link.ctrxPath}-${link.fieldName}-${link.type}`} style={{ position: 'relative', backgroundColor: '#f8fafc', padding: '10px', borderRadius: '4px', border: '1px solid #e2e8f0', marginBottom: '8px', fontSize: '12px' }}>
+
+                {/* Compact Delete Button */}
+                <button
+                    onClick={() => isInbound ? deleteInboundMapping(link) : deleteOutboundMapping(link)}
+                    style={{ position: 'absolute', top: '8px', right: '8px', background: 'none', border: 'none', color: '#94a3b8', fontSize: '16px', cursor: 'pointer', padding: '4px', lineHeight: '1' }}
+                    title="Delete connection"
+                >
+                    &times;
+                </button>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontWeight: 'bold', color: '#334155', alignItems: 'center', paddingRight: '24px' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {dialectBadge}
                         <span>{isInbound ? `${tagStr}${link.fieldName} ➔ CTRX` : `CTRX ➔ ${tagStr}${link.fieldName}`}</span>
                     </div>
-                    <span style={{ fontSize: '9px', padding: '2px 4px', borderRadius: '4px', backgroundColor: link.isAuto ? '#dbeafe' : '#fef3c7', color: link.isAuto ? '#1e40af' : '#9a3412', height: 'fit-content', marginLeft: '6px' }}>
+                    <span style={{ fontSize: '9px', padding: '2px 4px', borderRadius: '4px', backgroundColor: link.isAuto ? '#dbeafe' : '#fef3c7', color: link.isAuto ? '#1e40af' : '#9a3412', height: 'fit-content' }}>
                         {link.isAuto ? 'AUTO' : 'MANUAL'}
                     </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
-                    <button
-                        onClick={() => isInbound ? deleteInboundMapping(link) : deleteOutboundMapping(link)}
-                        style={{ flex: 1, padding: '4px', fontSize: '10px', color: '#ef4444', backgroundColor: '#fee2e2', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
-                        Delete
-                    </button>
+                {/* Only render action row if Auto status implies Overriding or Restoring */}
+                {(link.isAuto || link.hasAuto) && (
+                    <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
+                        {link.isAuto && (
+                            <button
+                                onClick={() => isInbound ? convertToManualInbound(link) : convertToManualOutbound(link)}
+                                style={{ flex: 1, padding: '4px', fontSize: '10px', color: '#10b981', backgroundColor: '#d1fae5', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
+                                Override
+                            </button>
+                        )}
 
-                    {link.isAuto && (
-                        <button
-                            onClick={() => isInbound ? convertToManualInbound(link) : convertToManualOutbound(link)}
-                            style={{ flex: 1, padding: '4px', fontSize: '10px', color: '#10b981', backgroundColor: '#d1fae5', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
-                            Override
-                        </button>
-                    )}
-
-                    {!link.isAuto && link.hasAuto && (
-                        <button
-                            onClick={() => isInbound ? restoreAutoInboundMapping(link) : restoreAutoOutboundMapping(link)}
-                            style={{ flex: 1, padding: '4px', fontSize: '10px', color: '#3b82f6', backgroundColor: '#dbeafe', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
-                            Restore Auto
-                        </button>
-                    )}
-                </div>
+                        {!link.isAuto && link.hasAuto && (
+                            <button
+                                onClick={() => isInbound ? restoreAutoInboundMapping(link) : restoreAutoOutboundMapping(link)}
+                                style={{ flex: 1, padding: '4px', fontSize: '10px', color: '#3b82f6', backgroundColor: '#dbeafe', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>
+                                Restore Auto
+                            </button>
+                        )}
+                    </div>
+                )}
             </div>
         );
     };
 
     return (
         <aside style={{ width: '340px', height: '100%', backgroundColor: '#ffffff', borderLeft: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', boxShadow: '-4px 0 15px rgba(0,0,0,0.05)', zIndex: 50, flexShrink: 0 }}>
+            <style>{`
+                .inspector-scroll-area::-webkit-scrollbar { width: 6px; }
+                .inspector-scroll-area::-webkit-scrollbar-track { background: #f8fafc; }
+                .inspector-scroll-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+                .inspector-scroll-area::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+            `}</style>
+
             <div style={{ padding: '12px 16px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f1f5f9', flexShrink: 0 }}>
                 <h3 style={{ margin: 0, fontSize: '13px', color: '#0f172a', textTransform: 'uppercase', fontWeight: 'bold' }}>Inspector</h3>
                 <button onClick={handleClearStates} style={{ background: 'none', border: 'none', fontSize: '18px', cursor: 'pointer', color: '#64748b', padding: 0 }}>&times;</button>
             </div>
 
-            <div style={{ flex: '1 1 0', overflowY: 'auto', overflowX: 'hidden', padding: '16px' }}>
+            <div className="inspector-scroll-area" style={{ flex: '1 1 0', overflowY: 'auto', overflowX: 'hidden', padding: '16px' }}>
 
                 <div style={{ marginBottom: '20px' }}>
                     <h4 style={{ margin: '0 0 8px 0', fontSize: '12px', color: '#475569' }}>
@@ -154,9 +168,9 @@ export default function InspectorSidebar({
                         <form onSubmit={handleCtrxSave}>
                             {editingParams.dbTable && (
                                 <div style={{ marginBottom: '10px' }}>
-                                    <label style={{ display: 'block', fontSize: '11px', color: '#64748b', marginBottom: '4px' }}>Parent DB Table</label>
-                                    <div style={{ display: 'inline-block', padding: '2px 5px', backgroundColor: '#f1f5f9', color: '#475569', borderRadius: '4px', border: '1px solid #cbd5e1', fontSize: '9px', fontWeight: 'bold', fontFamily: 'monospace', textTransform: 'uppercase' }}>
-                                        🗄️ {editingParams.dbTable}
+                                    <label style={{ display: 'block', fontSize: '11px', color: '#64748b', marginBottom: '4px' }}>Database Mapping</label>
+                                    <div style={{ fontSize: '12px', color: '#0f172a', fontFamily: 'monospace' }}>
+                                        {editingParams.dbTable}.{editingParams.dbColumn || selectedCtrxPath?.split('/').pop()}
                                     </div>
                                 </div>
                             )}
